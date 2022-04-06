@@ -1,10 +1,10 @@
-import {IAPI} from './types';
+import { API } from './types';
 
-let Service : IAPI;
+let Service: API;
 if (process.env.REACT_APP_WHOAMI === 'frontend') {
-    Service = require('./api-frontend').default as IAPI
+  Service = require('./api-frontend').default as API;
 } else {
-    Service = require('./api-fullstack').default as IAPI
+  Service = require('./api-fullstack').default as API;
 }
 
-export default Service
+export default Service;

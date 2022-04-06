@@ -1,9 +1,26 @@
-Problems:
-0. There are no any name which represent the app.
-1. UX: When refresh page, the text input was not focused. If we improve it, the user will add new task quickly and not spend time focusing the text-input manually.
-2. When user press ENTER to submit a new task, from the second time, data is duplicated.
-3. When user submit a new task succesfully, we should clear the input on the form.
-4. We can not remove a task individually by button X.
-5. The select all check box sometimes works incorrectly.
-6. Button ALL, ACTIVE, COMPLETED are working incorrectly. They seem like being used for filtering above "tasks".
-7. The checkbox of individual tasks will throw some errors when checking.
+A. Problems in user interface:
+    0. There are no any name which represent the app.
+        => 
+    1. UX: When refresh page, the text input was not focused, the list of task is not retrieved. 
+        => If we improve it, the user will add new task quickly and not spend time focusing the text-input manually.
+        => Save data as a key in LocalStorage.
+    2. When user press ENTER to submit a new task, from the second time, data is duplicated.
+        => resolved
+    3. When user submit a new task succesfully, we should clear the input.
+        =>
+    4. We can not remove a task individually by button X.
+        =>
+    5. The select all check box sometimes works incorrectly.
+        =>
+    6. Button ALL, ACTIVE, COMPLETED are working incorrectly. They seem like being used for filtering above "tasks".
+        => resolved
+        => Alternative: ALL, ACTIVE, COMPLETED => CheckBox: It help user knows current state of list tasks are ACTIVE or COMPLETED.
+    7. The checkbox of individual tasks will throw some errors when checking.
+        =>
+    8. If user create too many task, the layout will over screen.
+        =>
+B. Problems in source code:
+    0. Something went wrong in step of implementation of reducers [reducer.ts].
+        - DO NOT change State directly.
+        - This is the reason of A2.
+
