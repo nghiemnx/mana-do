@@ -1,13 +1,15 @@
 import { Todo, TodoStatus } from '../models/todo';
 import {
   AppActions,
+  TURN_ON_EDIT_TODO,
   CREATE_TODO,
-  DELETE_ALL_TODOS,
+  REMOVE_TODO_BY_STATUS,
   DELETE_TODO,
   SET_TODO,
   TOGGLE_ALL_TODOS,
-  UpdateTodoStatusAction,
+  TURN_OFF_EDIT_ALL_TODOS,
   UPDATE_TODO_STATUS,
+  UPDATE_TODO,
 } from './actions';
 
 export interface AppState {
@@ -30,49 +32,75 @@ function reducer(state: AppState, action: AppActions): AppState {
     case CREATE_TODO:
       return {
         ...state,
-        todos: [...state.todos, action.payload],
+        todos: [action.payload, ...state.todos],
       };
 
     case UPDATE_TODO_STATUS:
-      const updateTodoStatusAction: UpdateTodoStatusAction = action;
       const {
         payload: { todoId, checked },
-      } = updateTodoStatusAction;
+      } = action;
       return {
         ...state,
-        todos: state.todos.map((item) => {
-          return item.id === todoId
-            ? { ...item, status: checked ? TodoStatus.COMPLETED : TodoStatus.ACTIVE }
-            : item;
+        todos: state.todos.map((task) => {
+          return task.id === todoId
+            ? { ...task, status: checked ? TodoStatus.COMPLETED : TodoStatus.ACTIVE }
+            : task;
+        }),
+      };
+
+    case UPDATE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((task) => {
+          return task.id === action.payload.todoId
+            ? { ...task, content: action.payload.content }
+            : task;
         }),
       };
 
     case TOGGLE_ALL_TODOS:
-      const tempTodos = state.todos.map((e) => {
-        return {
-          ...e,
-          status: action.payload ? TodoStatus.COMPLETED : TodoStatus.ACTIVE,
-        };
-      });
-
       return {
         ...state,
-        todos: tempTodos,
+        todos: state.todos.map((task) => ({
+          ...task,
+          status: action.payload ? TodoStatus.COMPLETED : TodoStatus.ACTIVE,
+        })),
+      };
+
+    case TURN_ON_EDIT_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((task) => {
+          return task.id === action.payload.todoId
+            ? {
+                ...task,
+                isEditing: action.payload.isEditing,
+              }
+            : {
+                ...task,
+                isEditing: false,
+              };
+        }),
+      };
+
+    case TURN_OFF_EDIT_ALL_TODOS:
+      if (state.todos.every((task) => !task.isEditing)) return state;
+      return {
+        ...state,
+        todos: state.todos.map((task) => ({ ...task, isEditing: false })),
       };
 
     case DELETE_TODO:
-      console.log(action.payload);
-      const index1 = state.todos.findIndex((todo) => todo.id === action.payload);
-      state.todos.splice(index1, 1);
-
       return {
         ...state,
-        todos: state.todos,
+        todos: state.todos.filter((task) => task.id !== action.payload),
       };
-    case DELETE_ALL_TODOS:
+    case REMOVE_TODO_BY_STATUS:
+      if (action.payload !== TodoStatus.ACTIVE && action.payload !== TodoStatus.COMPLETED)
+        return { ...state, todos: [] };
       return {
         ...state,
-        todos: [],
+        todos: state.todos.filter((task) => task.status !== action.payload),
       };
     default:
       return state;

@@ -1,5 +1,5 @@
 import { API } from './types';
-import { Todo } from '../models/todo';
+import { Todo, TodoStatus } from '../models/todo';
 import axios from '../utils/axios';
 import { AxiosResponse } from 'axios';
 
@@ -16,6 +16,22 @@ class ApiFullstack extends API {
     const resp = await axios.get<AxiosResponse<Array<Todo>>>(`/tasks`);
 
     return resp.data.data;
+  }
+
+  async changeStatusTodos(listTodo: Array<string>, status: TodoStatus): Promise<boolean> {
+    return true;
+  }
+
+  async removeTasksByStatus(status: TodoStatus): Promise<boolean> {
+    return true;
+  }
+
+  async removeTasksById(id: string): Promise<boolean> {
+    return true;
+  }
+
+  async updateTaskById(id: string, content: string): Promise<boolean> {
+    return true;
   }
 }
 
