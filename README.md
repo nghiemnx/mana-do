@@ -1,7 +1,7 @@
-## Welcome to Manabie coding challenge
+## Welcome to kyanon digital coding challenge
 
 *Hello!*
-*We're excited that you're interested in joining Manabie. Below are the requirements and explanations for the challenge.*
+*We're excited that you're interested in joining kyanon digital. Below are the requirements and explanations for the challenge.*
 
 ### Notes: 
 - Our challenge codebase is bootstrapped by create-react-app with typescript.
@@ -30,7 +30,7 @@
     - The active/complete todo feature. Allows users to click on checkbox items they have completed
 
 #### Fullstack engineer
-- You have to make sure your code satisfy the back-end requirements in https://github.com/manabie-com/togo.
+- You have to make sure your code satisfy the back-end requirements in https://github.com/kyanon digital-com/togo.
 - Keep the existing features in sync with backend. (create/toggle status/toggle all/delete).
 - We do not require you to enhance the UI, but it is preferable (have some small changes but meaningful are great).
 - Done the common requirements above.

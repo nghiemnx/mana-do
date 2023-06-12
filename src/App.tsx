@@ -1,20 +1,21 @@
 import './App.css';
 import React from 'react';
 import ToDoPage from './components';
-import { ReactComponent as ManabieLogo } from './resourses/logo.svg';
+import KyanonLogo from './resourses/kyanon-logo.png';
 import { Layout, Header, Content, Footer } from './style';
+import { Image } from 'antd';
 
 function App() {
   return (
     <>
       <Layout>
         <Header>
-          <ManabieLogo />
+          <Image src={KyanonLogo} height={30} />
         </Header>
         <Content>
           <ToDoPage></ToDoPage>
         </Content>
-        <Footer>&copy; Made with ❤ by Manabie</Footer>
+        <Footer>&copy; Made with ❤ by Kyanon Digital</Footer>
       </Layout>
     </>
   );
