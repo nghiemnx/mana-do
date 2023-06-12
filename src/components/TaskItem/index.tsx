@@ -1,5 +1,5 @@
 import { DeleteTwoTone, InfoCircleTwoTone } from '@ant-design/icons';
-import { InputRef, Tooltip } from 'antd';
+import { InputRef, Popconfirm, Tooltip } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { TodoStatus } from '../../models/todo';
 import { CheckBoxCustom } from '../../style';
@@ -87,13 +87,15 @@ const TaskItem = (props: TaskItemProps) => {
         >
           <InfoCircleTwoTone style={{ fontSize: '20px', cursor: 'pointer' }} />
         </Tooltip>
-        <Tooltip placement="bottomLeft" title={'Remove this task!'}>
-          <DeleteTwoTone
-            onClick={handleRemoveTaskById}
-            twoToneColor="#FF4242"
-            style={{ fontSize: '20px', cursor: 'pointer' }}
-          />
-        </Tooltip>
+        <Popconfirm
+          placement="bottomRight"
+          title="Are you sure to delete this task?"
+          onConfirm={handleRemoveTaskById}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteTwoTone twoToneColor="#FF4242" style={{ fontSize: '20px', cursor: 'pointer' }} />
+        </Popconfirm>
       </TaskItemRight>
     </TaskItemWrapper>
   );

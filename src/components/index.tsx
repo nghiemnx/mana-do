@@ -1,4 +1,4 @@
-import { Button, Empty, Form, Radio, RadioChangeEvent } from 'antd';
+import { Button, Empty, Form, Popconfirm, Radio, RadioChangeEvent } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { Todo, TodoStatus } from '../models/todo';
@@ -232,9 +232,15 @@ const ToDoPage = () => {
             </Radio.Group>
           </TaskListFooterMiddle>
           <TaskListFooterRightSide>
-            <Button onClick={handleRemoveAllTask} disabled={tasks?.length < 1}>
-              {clearTaskStr}
-            </Button>
+            <Popconfirm
+              placement="bottomRight"
+              title="Are you sure to delete all the tasks?"
+              onConfirm={handleRemoveAllTask}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button disabled={tasks?.length < 1}>{clearTaskStr}</Button>
+            </Popconfirm>
           </TaskListFooterRightSide>
         </TaskListFooterWrapper>
       </TodoContentWrapper>
